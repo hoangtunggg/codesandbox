@@ -1,37 +1,23 @@
 import React from "react";
-import {
-  Divider,
-  List,
-  ListItem,
-  ListItemText,
-  Typography,
-} from "@mui/material";
-
-import "./styles.css";
-import models from "../../modelData/models";
+import { Divider, List, ListItem, ListItemText } from "@mui/material";
 import { Link } from "react-router-dom";
+import models from "../../modelData/models";
+import "./styles.css";
 
-/**
- * Define UserList, a React component of Project 4.
- */
-function UserList () {
+function UserList() {
     const users = models.userListModel();
+
     return (
-      <div>
         <List component="nav">
-          {users.map((item) => (
-            <div key={item._id}>
-              <ListItem button component={Link} to={`/users/${item._id}`}>
-                  <ListItemText primary={item.first_name}/>
-              </ListItem>
-              <Divider />
-            </div>
-          ))}
+            {users.map((user) => (
+                <React.Fragment key={user._id}>
+                    <ListItem button component={Link} to={`/users/${user._id}`}>
+                        <ListItemText primary={`${user.first_name} ${user.last_name}`} />
+                    </ListItem>
+                    <Divider />
+                </React.Fragment>
+            ))}
         </List>
-        <Typography variant="body1">
-          The model comes in from models.userListModel()
-        </Typography>
-      </div>
     );
 }
 
